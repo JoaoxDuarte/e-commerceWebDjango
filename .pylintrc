@@ -1,0 +1,18 @@
+[MASTER]
+    disable=
+        C0116, #Missing function or method docstring
+        C0115, #Missing-class-docstring
+        C0114, #Missing module docstring
+        C0303, #Trailing-whitespace
+        C0304, #missing-final-newline
+
+        W0105, #Pointless-string-statement
+        W0401, #Wildcard import views pylint
+        W0614, #Unused-wildcard-impor
+        
+        E1101, #No-member
+        
+
+
+#[TYPECHECK]
+#ignored-classes=Fysom,MyClass

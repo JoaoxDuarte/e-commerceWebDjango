@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+
+<main class="principal">
+  
+    <section class="banner-grid">
+{% for banner in banners %}
+      <a
+        href="{% url 'store' %}{{ banner.link }}"
+        class="banner-grid__imagem"
+      >
+        <img
+          src="{{ banner.img.url }}"
+          alt="{{ banner.link }}"
+        />
+{% endfor %}
+    </section>
+
+  </main>
+
+{% endblock %}
