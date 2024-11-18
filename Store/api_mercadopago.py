@@ -3,6 +3,7 @@ import mercadopago
 from dotenv import load_dotenv
 
 # ATENÇÃO #
+# Chave e token no .env
 # TODO: mudar credenciais de TESTE  # pylint: disable=fixme
 load_dotenv()
 PUBLIC_KEY = os.getenv('PUBLIC_KEY')

@@ -3,71 +3,16 @@
 
 {% block body %}
 
-<h3>Loja</h3>
-
-<div style="display: flex;">
-    <form method="POST" action="">
-        {% csrf_token %}
-        <p>Preço</p>
-        <input type="number" name="minimum_price" value={{ minimum }} step="0.01">
-        <input type="number" name="maximum_price" value={{ maximum }} step="0.01">
-    
-
-        <p>Tamanho</p>
-        {% for size in sizes %}
-        <input type="radio" name="size" value="{{ size }}">
-        <label for="{{ size }}">{{ size }}</label>
-        {% endfor %}
-
-
-        <p>Categoria</p>
-        {% for category in categories %}
-        <input type="radio" name="category" value="{{ category.slug }}">
-        <label for="{{ category.slug }}">{{ category.name }}</label>
-        {% endfor %}
-
-        
-        <p>Tipo</p>
-        {% for type in navigation_types %}
-        <input type="radio" name="type" value="{{ type.slug }}">
-        <label for="{{ type.slug }}">{{ type.name }}</label>
-        {% endfor %}
-        <button type="submit">Aplicar filtros</button>
-    </form>
-
-    <div>
-        Ordenar por:
-        <ul>
-            <li><a href="#" class="sort-item" name="menor-preco">Menor Preço</a></li>
-            <li><a href="#" class="sort-item" name="maior-preco">Maior Preço</a></li>
-            <li><a href="#" class="sort-item" name="mais-vendidos">Mais Vendidos</a></li>
-        </ul>
-        {% for product in products %}
-
-        <a href="{% url 'show_product' product.id %}">
-        <img src="{{ product.img.url }}" widht="300" height="450">]
-        </a>
-        <p>Produto: {{ product.name }}</p>
-        <p>Preço: {{ product.price }}</p>
-
-        {% endfor %}
-    </div>
-
-</div>
-
-
-
-
-
 <main class="principal principal--padding-b">
     <section class="loja">
-      <div class="menu">
+      <form class="menu" method="POST" action="">
+        {% csrf_token %}
         <div class="menu__cabecalho">
           <div class="menu__titulos">
             <div>
               <img
                 class="menu__icone"
-                src="Imagens/filter-big-1-svgrepo-com.svg"
+                src="{% static 'images/filter-big-1-svgrepo-com.svg' %}"
                 alt="Ícone filtrar"
               />
             </div>
@@ -87,14 +32,16 @@
                 type="range"
                 value="0"
                 min="0"
-                max="1000"
+                max="{{ maximum }}"
+                step="0.01"
               />
               <input
                 id="toSlider"
                 type="range"
-                value="1000"
+                value="{{ maximum }}"
                 min="0"
-                max="1000"
+                max="{{ maximum }}"
+                step="0.01"
               />
             </div>
 
@@ -105,9 +52,11 @@
                     class="form_control_container__time__input"
                     type="number"
                     id="fromInput"
+                    name="minimum_price"
                     value="0"
                     min="0"
-                    max="1000"
+                    max="{{ maximum }}"
+                    step="0.01"
                   />
                 </div>
                 <p>até</p>
@@ -116,14 +65,16 @@
                     class="form_control_container__time__input"
                     type="number"
                     id="toInput"
-                    value="1000"
+                    name="maximum_price"
+                    value="{{ maximum }}"
                     min="0"
-                    max="1000"
+                    max="{{ maximum }}"
+                    step="0.01"
                   />
                 </div>
               </div>
 
-              <button class="menu__botao">Filtrar</button>
+              <button type="submit" class="menu__botao">Filtrar</button>
             </div>
           </div>
         </div>
@@ -137,104 +88,17 @@
 
           <div class="menu__expansivel-conteudo">
             <div class="menu__tamanhos">
+  {% for size in sizes %}
               <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
+                <div class="menu__tamanho-quadrado">{{ size }}</div>
                 <input
                   class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
+                  type="radio"
+                  name="size"
+                  value="{{ size }}"
                 />
               </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
-
-              <div class="menu__tamanho">
-                <div class="menu__tamanho-quadrado">36</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="36"
-                  value="36"
-                />
-              </div>
+  {% endfor %}
             </div>
           </div>
         </div>
@@ -248,65 +112,76 @@
 
           <div class="menu__expansivel-conteudo">
             <div class="menu__categorias">
+{% for type in navigation_types %}
               <div class="menu__categoria">
                 <div class="menu__categoria-quadrado"></div>
-                <div class="menu__categoria-texto">Camisas</div>
+                <div class="menu__categoria-texto">{{ type.name }}</div>
                 <input
                   class="menu__checkbox"
-                  type="checkbox"
-                  name="Camisas"
-                  value="Camisas"
+                  type="radio"
+                  name="type"
+                  value="{{ type.slug }}"
                 />
               </div>
-
-              <div class="menu__categoria">
-                <div class="menu__categoria-quadrado"></div>
-                <div class="menu__categoria-texto">Vestidos</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="Vestidos"
-                  value="Vestidos"
-                />
-              </div>
-
-              <div class="menu__categoria">
-                <div class="menu__categoria-quadrado"></div>
-                <div class="menu__categoria-texto">Blusas</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="Blusas"
-                  value="Blusas"
-                />
-              </div>
-
-              <div class="menu__categoria">
-                <div class="menu__categoria-quadrado"></div>
-                <div class="menu__categoria-texto">Tops</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="Tops"
-                  value="Tops"
-                />
-              </div>
-
-              <div class="menu__categoria">
-                <div class="menu__categoria-quadrado"></div>
-                <div class="menu__categoria-texto">Casacos e jaquetas</div>
-                <input
-                  class="menu__checkbox"
-                  type="checkbox"
-                  name="Casacos e jaquetas"
-                  value="Casacos e jaquetas"
-                />
-              </div>
+{% endfor %}
             </div>
           </div>
         </div>
-      </div>
+      </form>
 
+{% comment "PRODUCTS" %}
+ {% endcomment %}
+      <div class="produtos">
+        <div class="produtos__cabecalho">
+          <button class="produtos__cabecalho-filtrar">Filtrar</button>
+
+          <div class="produtos__cabecalho-ordenarpor">
+            <div class="produtos__cabecalho-imgicone">
+              <img
+                class="produtos__cabecalho-icone"
+                src="{% static 'images//sort-vertical-svgrepo-com.svg' %}"
+                alt=""
+              />
+            </div>
+            <p class="produtos__subtitulo">Ordenar por:</p>
+            {% comment %}
+              redirectToPage(), função do store.js
+            {% endcomment %}
+            <select class="produtos__select" onchange="redirectToPage()">
+              <option value="">Selecione uma opção</option>
+              <option class="sort-item" value="maior-preco">Maior preço</option>
+              <option class="sort-item" value="menor-preco">Menor preço</option>
+              <option class="sort-item" value="mais-vendidos">Mais vendidos</option>
+            </select>
+          </div>
+        </div>
+
+        
+
+        <div class="produtos__grade">
+          {% for product in products %}
+          <a
+            href="{% url 'show_product' product.id %}"
+            class="produto"
+          >
+            <div class="produto__imagem">
+              <img
+                src="{{ product.img.url }}"
+                alt="Imagem do Produto"
+              />
+             
+            </div>
+
+            <div class="produto__textos">
+              <p class="produto__titulo">{{ product.name }}</p>
+              <div class="produto__preco">
+                <p class="produto__avista">R$ {{ product.price }}</p>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>      
     
     </section>
   </main>
