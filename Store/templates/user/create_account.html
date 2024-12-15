@@ -3,34 +3,59 @@
 
 {% block body %}
 
+<main class="principal">
+    <section class="conta">
+      <div class="conta__container">
+        <div class="checkout__titulos">
+          <p class="checkout__titulo">Preencha seus dados para criar uma conta</p>
+        </div>
 
-<h3>Preencha seus dados para criar uma conta</h3>
+    {% if error == "invalid_email" %}
+    <p>Este e-mail é inválido, tente novamente</p>
+    {% endif %}
 
-{% if error == "invalid_email" %}
-<p>Este e-mail é inválido, tente novamente</p>
-{% endif %}
+    {% if error == "existing_user" %}
+    <p>Já existe um usuário com esse e-mail, <a href="{% url 'sign_in' %}"> faça o login</p>
+    {% endif %}
 
-{% if error == "existing_user" %}
-<p>Já existe um usuário com esse e-mail, <a href="{% url 'sign_in' %}"> faça o login</p>
-{% endif %}
+    {% if error == "different_passwords" %}
+    <p>Preencha todas as informações do formulário corretamente para criar uma conta</p>
+    {% endif %}
 
-{% if error == "different_passwords" %}
-<p>Preencha todas as informações do formulário corretamente para criar uma conta</p>
-{% endif %}
+    {% if error == "filling" %}
+    <p>As senha estão diferentes ou seus campos estão vazios</p>
+    {% endif %}
+            
+        <form
+          class="conta__form"
+          action="{% url 'create_account' %}"
+          method="post"
+        >
+        {% csrf_token %}
+          <div class="conta__item conta__item--email">
+            <label for="email">E-mail</label>
+            <input name="email" type="email" placeholder="Email" />
+          </div>
 
-{% if error == "filling" %}
-<p>As senha estão diferentes ou seus campos estão vazios</p>
-{% endif %}
+          <div class="conta__item">
+            <label for="password">Senha</label>
+            <input name="password" type="password" placeholder="Senha" />
+          </div>
+         
+          <div class="conta__item">
+            <label for="password_confirm">Confirmação da Senha</label>
+            <input name="password_confirm" type="password" placeholder="Senha" />
+          </div>
+
+          <button class="subtotal__botao" type="submit">
+            Criar Conta
+          </button>
+        </form>
+        <a href="{% url 'sign_in' %}">Já tem uma conta? Fazer login</a>
+      </div>
+    <section/>
+ </main>
 
 
 
-<form method="POST" action="{% url 'create_account' %}">
-    {% csrf_token %}
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="password" placeholder="Senha">
-    <input type="password" name="password_confirm" placeholder="Confirmar senha">
-<button type="submit">Criar Conta</button>
-</form>
-
-<a href="{% url 'sign_in' %}">Já tem uma conta? Fazer login</a>
 {% endblock %}

@@ -102,8 +102,11 @@ def show_product(request, id_product, id_color=None):
         in_stock = False
         colors = {}
         quantities = {}'''
+
+    # [:4] mostra até 4 itens em similares e .exclude(id=product.id) é para excluir o item atual
+    similars = Product.objects.filter(category__id=product.category.id, type__id=product.type.id).exclude(id=product.id)[:4]
     context = {"product": product, "in_stock": in_stock,
-               "colors": colors, "sizes": sizes, "selection_color": selection_color}
+               "colors": colors, "sizes": sizes, "selection_color": selection_color, "similars": similars}
     return render(request, 'show_product.html', context)
 
 

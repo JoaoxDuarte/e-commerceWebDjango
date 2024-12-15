@@ -3,50 +3,147 @@
 
 {% block body %}
 
-<h3>{{ product.name }}</h3>
+<main class="principal principal--padding-b principal--gap">
+    <section class="s-produto">
+      <div class="s-produto__carrossel">
+        <div class="s-produto__carrossel-itens">
+          <div class="s-produto__carrossel-img">
+            <img
+              src="{{ product.img.url }}"
+              alt="Imagem Carrossel 1"
+            />
+          </div>
+          <div class="s-produto__carrossel-img" style="overflow: hidden;">
+            <img
+              src="{{ product.img.url }}"
+              alt="Imagem Carrossel 2"
+              style="transform: scale(1.6);"
+            />
+
+          </div>
+        </div>
+
+
+
+        <div class="s-produto__carrossel-botoes">
+          <div
+            class="s-produto__carrossel-botao s-produto__carrossel-botao--selecionado"
+          ></div>
+          <div class="s-produto__carrossel-botao"></div>
+          <div class="s-produto__carrossel-botao"></div>
+          <div class="s-produto__carrossel-botao"></div>
+          <div class="s-produto__carrossel-botao"></div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class="s-produto__informacoes">
+        <div class="s-produto__breadcrumbs">
+          <span><a href="{% url 'store' %}">Loja</a></span>
+          <span><a href="{% url 'store' %}{{ product.category.slug }}">{{ product.category.name }}</a></span>
+          <span><a href="{% url 'store' %}{{ product.category.slug }}-{{ product.type.slug }}">{{ product.type.name }}</a></span>
+          <span>
+            <p>{{ product.name }}</p>
+          </span>
+        </div>
+
+        <div class="s-produto__infos">
+          <h1 class="s-produto__titulo">{{ product.name }}</h1>
+
+          <p class="s-produto__preco">R$ {{ product.price }}</p>
+
+          <div class="s-produto__cor">
+            <p class="s-produto__cor-nome">Cor: <span>{{ selection_color.name }}</span></p>
+            <div class="s-produto__cores">
+{% for color in colors %}
+              <a
+                href="{% url 'show_product' product.id color.id %}"
+                class="s-produto__cores-item"
+                style="background-color: {{ color.code }}"
+              ></a>
+{% endfor %}
+            
+            </div>
+          </div>
+
 
 {% if in_stock %}
-
-
-
-<img src="{{ product.img.url }}" widht="300" height="450">
-<p>Produto: {{ product.name }}</p>
-<p>Preço: {{ product.price }}</p>
-
-
-{% comment "Se selection_color for vazio" %}{% endcomment %}
-{% if selection_color %}
-Cor: {{ selection_color.name }}
-{% endif %}
-
-
-{% for color in colors %}
-<a href="{% url 'show_product' product.id color.id %}">
-
-    {% comment %} Font Awesome {% endcomment %}
-    <i class="fa-solid fa-circle" style="color: {{ color.code }}"></i>
-</a>
-{% endfor %}
-
-{% if sizes %}
-<form method="POST" action="{% url 'add_cart' product.id %}">
-    {% csrf_token %}
-    <p>Selecione um tamanho:</p>
-    {% for size in sizes %}
-    <input type="radio" name="size" value="{{ size }}">
-    <label for="{{ size }}">{{ size }}</label>
-    {% endfor %}
-
-    <input type="hidden" name="color" value="{{ selection_color.id }}">
-    <button type="submit">Adicionar ao Carrinho</button>
-</form>
-{% endif %}
-
-
+  {% if sizes %}
+    <form method="POST" action="{% url 'add_cart' product.id %}">
+        {% csrf_token %}
+              <div class="s-produto__tamanho">
+                <div class="s-produto__tamanhos">
+                {% for size in sizes %}
+                <div class="menu__tamanho">
+                    <div class="s-produto__tamanhos-item">{{ size }}</div>
+                    <input class="menu__checkbox" type="radio" name="size" value="{{ size }}">
+                </div>
+                {% endfor %}
+                </div>
+              </div>
+            <input type="hidden" name="color" value="{{ selection_color.id }}">
+            <button type="submit" class="s-produto__adicicionar">Adicionar à sacola</button>
+    </form>
+  {% endif %}
 {% else %}
-
-<p>Produto fora de estoque</p>
-
+    <h3>Item fora de estoque</h3>
 {% endif %}
+        </div>
+
+
+        <div class="s-produto__descricao">
+          <p class="s-produto__descricao-titulo">Descrição do produto</p>
+          <div class="s-produto__descricao-textos">
+            <p>
+             {{ product.name }}
+            </p>
+            <p>
+              COMPOSIÇÃO <br />
+              96% Viscose 4% Elastano
+            </p>
+            <p>
+              CÓDIGO DO PRODUTO <br />
+              Ref: <span>{{ product.id }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% if similars %}
+    <section class="similares">
+      <h2 class="similares__titulo">
+        Gostou desse produto? Veja itens similares
+      </h2>
+
+      <div class="similares__container">
+{% for similar in similars %}
+        <a
+          href="{% url 'show_product' similar.id %}"
+          class="produto"
+        >
+          <div class="produto__imagem">
+            <img
+              src="{{ similar.img.url }}"
+              alt="Imagem do Produto"
+            />
+          </div>
+          <div class="produto__textos">
+            <p class="produto__titulo">{{ similar.name }}</p>
+            <div class="produto__preco">
+              <p class="produto__avista">R$ {{ similar.price }}</p>
+            </div>
+          </div>
+        </a>
+{% endfor %}
+      </div>
+    </section>
+{% endif %}
+  </main>
 
 {% endblock %}
