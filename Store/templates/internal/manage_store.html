@@ -3,17 +3,41 @@
 
 {% block body %}
 
-<h3>Gerenciar Loja</h3>
+<main class="principal">
+    <section class="conta">
+      <div class="conta__container">
+        <div class="checkout__titulos">
+          <p class="checkout__titulo">Principais Indicadores</p>
+        </div>
+        <p>Faturamento: R$ {{ revenue }}</p>
+        <p>Produtos Vendidos: {{ product_quantity  }}</p>
+        <p>Total de Pedidos: {{  order_quantity  }}</p>
+      </div>
 
-<p>Faturamento: {{ revenue }}</p>
-<p>Produtos Vendidos: {{ product_quantity  }}</p>
-<p>Total de Pedidos: {{  order_quantity  }}</p>
+      <div class="conta__container">
+        <div class="checkout__titulos">
+          <p class="checkout__titulo">Exportar Relatórios</p>
+        </div>
 
-<hr>
-<h3>Exportar Relatórios</h3>
+        <div  class="conta__form">
+        <a class="subtotal__botao" href="{% url 'export_report' 'order' %}">
+            Exportar Pedidos
+        </a>
+        </div>
 
-<a href="{% url 'export_report' 'order' %}">Exportar Pedidos</a>
-<a href="{% url 'export_report' 'customer' %}">Exportar Clientes</a>
-<a href="{% url 'export_report' 'address' %}">Exportar Endereços</a>
+        <div  class="conta__form">
+        <a class="subtotal__botao" href="{% url 'export_report' 'customer' %}">
+            Exportar Clientes
+        </a>
+        </div>
+
+        <div  class="conta__form">
+        <a class="subtotal__botao" href="{% url 'export_report' 'address' %}">
+            Exportar Endereços
+        </a>
+        </div>
+      </div>
+      <section/>
+ </main>
 
 {% endblock %}
