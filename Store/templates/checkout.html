@@ -55,7 +55,6 @@
                 </a>
                 </div>
 
-              <div class="checkout__endereco-cadastrado">
                 {% for address in addresses %}
                     <div class="checkout__pagamento-item">
                     <input  type="radio" name="address" value="{{ address.id }}" />
@@ -65,7 +64,6 @@
                   >
                     </div>
                 {% endfor %}
-              </div>
             </div>
           </div>
 
