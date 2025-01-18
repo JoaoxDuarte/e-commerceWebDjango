@@ -1,4 +1,4 @@
-# E-commerce Site with Django Framework
+# E-commerce Site — Django Framework
 
 Este é um projeto completo de e-commerce desenvolvido como portfólio, utilizando o framework Django. Ele inclui funcionalidades para o administrador gerenciar os indicadores da loja, exportar relatórios e processar pagamentos reais através da API do Mercado Pago.
 
