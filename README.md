@@ -15,6 +15,7 @@ Integração com a API do Mercado Pago para processar pagamentos de forma segura
 ### Interface Responsiva
 Design amigável e adaptável a diferentes dispositivos.
 
+
 ## Tecnologias Utilizadas
 
 - **Backend:** Django, Python
@@ -32,6 +33,7 @@ Antes de começar, certifique-se de ter:
 - **Visual Studio Code** com as extensões:
   - Python
   - Django
+    
 
 ## Como Rodar o Projeto
 
@@ -45,7 +47,7 @@ Abra o projeto na IDE com:
 code .
 ```
 
-### Crie e Ative um Ambiente Virtual
+### Se Quiser, Crie e Ative um Ambiente Virtual
 
 No terminal integrado do Visual Studio Code:
 
@@ -83,6 +85,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+
 ## Como Acessar 
 
 ### Painel Administrativo (urls.py)
@@ -91,4 +94,20 @@ Acesse [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) com as credenc
 ### Aplicação Principal
 Acesse [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-### Há um Banco para Testes.
+# Há um Banco para Testes
+### Caso Não Queira: (https://docs.djangoproject.com/en/5.1/topics/migrations/)
+
+
+# Imagens
+
+![image1](https://github.com/user-attachments/assets/3f051861-ccb0-486d-b22e-a8107120a444)
+
+![image2](https://github.com/user-attachments/assets/02e4723e-5521-4ffb-8442-72f197699999)
+
+![image3](https://github.com/user-attachments/assets/6b9fc023-862a-4748-869b-343d64e44445)
+
+![image4](https://github.com/user-attachments/assets/fb76ddba-1b80-4f9f-925d-5ae00506c821)
+
+![image5](https://github.com/user-attachments/assets/945fadf4-bdb7-427f-9d73-4d84fcd567fe)
+
+![image6](https://github.com/user-attachments/assets/ed5f5f7e-6e16-449f-a8b5-b8544965d377)
